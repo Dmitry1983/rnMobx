@@ -1,0 +1,6 @@
+module Pods_rnMobx_rnMobxTests {
+  umbrella header "Pods-rnMobx-rnMobxTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

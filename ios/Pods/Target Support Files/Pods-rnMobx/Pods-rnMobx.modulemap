@@ -1,0 +1,6 @@
+module Pods_rnMobx {
+  umbrella header "Pods-rnMobx-umbrella.h"
+
+  export *
+  module * { export * }
+}
