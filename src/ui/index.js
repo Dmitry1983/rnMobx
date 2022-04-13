@@ -7,6 +7,8 @@ import {
   TextInput,
   StyleSheet,
   useWindowDimensions,
+  //   Modal,
+  //   Alert,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {observer} from 'mobx-react-lite';
@@ -22,12 +24,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 10,
-    //alignItems: 'center',
     paddingLeft: 10,
   },
   title: {
     paddingHorizontal: 5,
-    // backgroundColor: 'grey',
   },
   viewLine: {
     flexDirection: 'row',
@@ -44,6 +44,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
   },
+  checkBoxColors: {
+    tintColor: 'grey',
+    onCheckColor: 'green',
+    onTintColor: 'green',
+  },
 });
 
 // оборачиваем компонент в observer
@@ -52,6 +57,12 @@ const Todo = observer(() => {
   const {height, width} = useWindowDimensions();
   const initialState = '';
   const [text, setText] = useState(initialState);
+  //   const [modalVisible, setModalVisible] = useState(false);
+
+  const addTodo = () => {
+    TodoStore.createTodo({id: nanoid(10), title: text});
+    setText(initialState);
+  };
 
   return (
     <ScrollView style={[styles.scroll, {width: width, height: height}]}>
@@ -63,13 +74,7 @@ const Todo = observer(() => {
           defaultValue={text}
         />
         <View style={[styles.buttonView, {width: width / 3}]}>
-          <Button
-            title="Add Todo"
-            onPress={() => {
-              TodoStore.createTodo({id: nanoid(10), title: text});
-              setText(initialState);
-            }}
-          />
+          <Button title="Add Todo" onPress={() => text !== '' && addTodo()} />
         </View>
       </View>
 
@@ -77,9 +82,7 @@ const Todo = observer(() => {
         <View style={styles.viewLine} key={id}>
           <CheckBox
             value={completed}
-            tintColor="grey"
-            onCheckColor="green"
-            onTintColor="green"
+            {...styles.checkBoxColors}
             onValueChange={() => TodoStore.completeTodo(id)}
           />
 

@@ -4,12 +4,14 @@ class Todo {
   // инициируем массив объектов ToDo листа
   todos = [{id: '0100da', title: 'Hello world!', completed: false}];
 
-  // makeAutoObservable делает все свойства наблюдаемыми по умолчанию
+  // makeAutoObservable делает все
+  // свойства наблюдаемыми по умолчанию
   constructor() {
     makeAutoObservable(this);
   }
 
-  // стор в mobx мутабельный, поэтому просто пушим в него новую задачу
+  // стор в mobx мутабельный,
+  // поэтому просто пушим в него новую задачу
   createTodo(todo) {
     console.log('create : ' + todo.id + ' / ' + todo.title);
     this.todos.push(todo);
@@ -21,7 +23,8 @@ class Todo {
     this.todos = this.todos.filter(todo => todo.id !== id);
   }
 
-  // ставим  true completed выполненной задаче или false в противном случае
+  // ставим  true completed
+  // выполненной задаче или false в противном случае
   completeTodo(id) {
     console.log('complete : ' + id);
     this.todos = this.todos.map(todo =>
